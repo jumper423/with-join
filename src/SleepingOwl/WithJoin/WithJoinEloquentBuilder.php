@@ -43,7 +43,9 @@ class WithJoinEloquentBuilder extends Builder
 				$this->mergeWheres($wheres, $bindings);
 			}
 		}
-		$this->selectFromQuery($this->model->getTable(), '*');
+		if (!$this->query->columns) {
+            $this->selectFromQuery($this->model->getTable(), '*');
+        }
 		return parent::getModels($columns);
 	}
 
